@@ -29,11 +29,11 @@ module.exports = {
                 }
                 rand = Math.floor(Math.random() * 1000 + 1);
 
-                if (rand >= 1000 - 6 - softpity){
+                if (rand > 1000 - 6 - softpity){
                     five++;
                     pity5 = 0;
                     pity4++;
-                } else if (pity4 >= 9 || rand >= 1000 - 6 - softpity - 51){
+                } else if (pity4 >= 9 || rand > 1000 - 6 - softpity - 51){
                         four++;
                         pity5++;
                         pity4 = 0;
