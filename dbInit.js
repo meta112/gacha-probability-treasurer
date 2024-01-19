@@ -59,6 +59,11 @@ module.exports = {
             type: Sequelize.STRING,
             allowNull: false,
         },
+        cons: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            defaultValue: 0,
+        },
         versions_away: {
             type: Sequelize.INTEGER,
             allowNull: false,
@@ -68,8 +73,8 @@ module.exports = {
             allowNull: false,
             defaultValue: true,
         },
-        date: {
-            type: Sequelize.DATE,
+        version: {
+            type: Sequelize.STRING,
             allowNull: false,
         },
     }),
