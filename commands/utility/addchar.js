@@ -61,7 +61,6 @@ module.exports = {
                 user = await Tables.Users.create({
                     username: interaction.user.username,
                 });
-                interaction.reply(`Adding new user ${user.username}`);
             } catch (e) {
                 if (e.name === 'SequelizeUniqueConstraintError') {
                     return interaction.reply('Error: tried to create duplicate user');
