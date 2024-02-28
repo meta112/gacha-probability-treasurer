@@ -17,19 +17,19 @@ module.exports = {
 
         const cons = new TextInputBuilder()
             .setCustomId('cons')
-            .setLabel('Desired constellation (assume currently own none):')
+            .setLabel('Desired constellation:')
             .setStyle(TextInputStyle.Short)
             .setRequired(true);
 
         const versions_away = new TextInputBuilder()
             .setCustomId('versions_away')
-            .setLabel('Number of versions away (e.g. 4.0 -> 4.2 is 2):')
+            .setLabel('Number of version changes away:')
             .setStyle(TextInputStyle.Short)
             .setRequired(true);
 
         const firsthalf = new TextInputBuilder()
             .setCustomId('firsthalf')
-            .setLabel('Is the character banner in the first half? (yes/no)')
+            .setLabel('Is the character in the first half? (yes/no)')
             .setStyle(TextInputStyle.Short)
             .setRequired(true);
 
@@ -49,6 +49,57 @@ module.exports = {
         await interaction.showModal(modal);
     },
     async process(interaction) {
-        return;
+        const newTarget = interaction.fields.getTextInputValue('newTarget');
+        const cons = parseInt(interaction.fields.getTextInputValue('cons'));
+        const versions_away = parseInt(interaction.fields.getTextInputValue('versions_away'));
+        const firsthalf = interaction.fields.getTextInputValue('firsthalf');
+        const version = interaction.fields.getTextInputValue('version');
+
+        let user = await Tables.Users.findOne({ where: { username: interaction.user.username } });
+        if (!user) {
+            try {
+                user = await Tables.Users.create({
+                    username: interaction.user.username,
+                });
+                interaction.reply(`Adding new user ${user.username}`);
+            } catch (e) {
+                if (e.name === 'SequelizeUniqueConstraintError') {
+                    return interaction.reply('Error: tried to create duplicate user');
+                }
+                return interaction.reply('Something went wrong with updating user.');
+            }
+        }
+        const character = await Tables.Wishlist.findOne({ where: { username: interaction.user.username, profile: user.active_profile, target: newTarget } });
+        if (character) {
+            return interaction.reply(`${newTarget} is already in ${interaction.user.username}'s profile ${user.active_profile}.`);
+        }
+
+
+        if (!Number.isInteger(cons) || cons < 0){
+            await interaction.reply({ content: 'Constellation must be a non-negative integer', ephemeral: true });
+        } else if (!Number.isInteger(versions_away) || versions_away < 0) {
+            await interaction.reply({ content: 'Versions away must be a non-negative integer', ephemeral: true });
+        } else if (typeof firsthalf !== 'string' || firsthalf.length == 0
+        || (firsthalf.trim().toLowerCase() !== 'yes' && firsthalf.trim().toLowerCase() !== 'no')){
+            await interaction.reply({ content: 'Type "yes" or "no" to answer if the character is in the first half or not', ephemeral: true });
+        } else {
+            try {
+                const newChar = await Tables.Wishlist.create({
+                    username: interaction.user.username,
+                    profile: user.active_profile,
+                    target: newTarget,
+                    cons: cons,
+                    versions_away: versions_away,
+                    firsthalf: (firsthalf.trim().toLowerCase() === 'yes' ? true : false),
+                    version: version,
+                });
+                return interaction.reply(`Adding ${newChar.target} to ${interaction.user.username}'s profile ${user.active_profile}.`);
+            } catch (e) {
+                if (e.name === 'SequelizeUniqueConstraintError') {
+                    return interaction.reply('Error: tried to create duplicate user');
+                }
+                return interaction.reply('Something went wrong with updating user.');
+            }
+        }
     },
 };
