@@ -71,7 +71,7 @@ module.exports = {
             await interaction.reply({ content: 'Pity must be below 90', ephemeral: true });
         } else if (typeof guaranteed !== 'string' || guaranteed.length == 0
         || (guaranteed.trim().toLowerCase() !== 'yes' && guaranteed.trim().toLowerCase() !== 'no')){
-            await interaction.reply({ content: `Type 'yes' or 'no' to answer if you have the 50/50 guarantee or not ${typeof guaranteed}`, ephemeral: true });
+            await interaction.reply({ content: 'Type "yes" or "no" to answer if you have the 50/50 guarantee or not', ephemeral: true });
         } else {
             const user = await Tables.Users.findOne({ where: { username: interaction.user.username } });
             if (user) {
