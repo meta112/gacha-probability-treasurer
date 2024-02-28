@@ -48,4 +48,7 @@ module.exports = {
         modal.addComponents(actionRow1, actionRow2, actionRow3, actionRow4, actionRow5);
         await interaction.showModal(modal);
     },
+    async process(interaction) {
+        return;
+    },
 };
