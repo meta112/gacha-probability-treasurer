@@ -49,7 +49,7 @@ module.exports = {
     Wishlist: sequelize.define('wishlist', {
         username: {
             type: Sequelize.STRING,
-            unique: true,
+            allowNull: false,
         },
         profile: {
             type: Sequelize.INTEGER,
@@ -57,7 +57,7 @@ module.exports = {
         },
         target: {
             type: Sequelize.STRING,
-            allowNull: false,
+            unique: true,
         },
         cons: {
             type: Sequelize.INTEGER,
