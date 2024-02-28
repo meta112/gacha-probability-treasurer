@@ -17,7 +17,7 @@ module.exports = {
             const c = wishlist[i];
             result =
 `${result}
-- ${c.target} C${c.cons}:   ${c.firsthalf ? 'first' : 'second'} half of Version ${c.version}, in ${c.versions_away} versions`;
+- ${c.target} C${c.cons}:   ${c.firsthalf ? 'first' : 'second'} half of Version ${c.version}, in ${c.versions_away} version${c.versions_away == 1 ? '' : 's'}`;
         }
         return interaction.reply(result);
     },
