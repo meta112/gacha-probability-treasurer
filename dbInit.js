@@ -57,7 +57,7 @@ module.exports = {
         },
         target: {
             type: Sequelize.STRING,
-            unique: true,
+            allowNull: false,
         },
         cons: {
             type: Sequelize.INTEGER,
