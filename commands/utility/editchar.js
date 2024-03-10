@@ -77,6 +77,14 @@ module.exports = {
         const version = interaction.fields.getTextInputValue('version');
 
         const user = await Tables.Users.findOne({ where: { username: interaction.user.username } });
+
+        if (origname != target) {
+            const newNameCheck = await Tables.Wishlist.findOne({ where: { username: interaction.user.username, profile: user.active_profile, target: target } });
+            if (newNameCheck) {
+                return interaction.reply(`${target} is already in ${interaction.user.username}'s profile ${user.active_profile}.`);
+            }
+        }
+
         const character = await Tables.Wishlist.findOne({ where: { username: interaction.user.username, profile: user.active_profile, target: origname } });
 
         if (!Number.isInteger(cons) || cons < 0){
