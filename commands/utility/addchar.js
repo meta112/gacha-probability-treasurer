@@ -94,9 +94,6 @@ module.exports = {
                 });
                 return interaction.reply(`Adding ${newChar.target} to ${interaction.user.username}'s profile ${user.active_profile}.`);
             } catch (e) {
-                if (e.name === 'SequelizeUniqueConstraintError') {
-                    return interaction.reply('Error: tried to create duplicate character');
-                }
                 return interaction.reply('Something went wrong with updating wishlist.');
             }
         }
