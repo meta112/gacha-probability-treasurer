@@ -44,11 +44,10 @@ module.exports = {
                 }
             }
         } else if (interaction.isModalSubmit()){
-            const modalSplitName = interaction.customId.split('_');
-            if (modalSplitName.length == 2 && modalSplitName[0] == 'editchar'){
+            if (interaction.customId.slice(0, 9) == 'editchar_'){
                 const command = interaction.client.commands.get('editchar');
                 try {
-                    await command.process(interaction, modalSplitName[1]);
+                    await command.process(interaction, interaction.customId.slice(9));
                 } catch (error) {
                     console.error(error);
                     if (interaction.replied || interaction.deferred) {
