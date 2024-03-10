@@ -44,7 +44,20 @@ module.exports = {
                 }
             }
         } else if (interaction.isModalSubmit()){
-            if (interaction.customId === 'wishbank'){
+            const modalSplitName = interaction.customId.split('_');
+            if (modalSplitName.length == 2 && modalSplitName[0] == 'editchar'){
+                const command = interaction.client.commands.get('editchar');
+                try {
+                    await command.process(interaction, modalSplitName[1]);
+                } catch (error) {
+                    console.error(error);
+                    if (interaction.replied || interaction.deferred) {
+                        await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
+                    } else {
+                        await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+                    }
+                }
+            } else if (interaction.customId === 'wishbank'){
                 const command = interaction.client.commands.get('setwishes');
                 try {
                     await command.process(interaction);
