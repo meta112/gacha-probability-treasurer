@@ -50,7 +50,7 @@ module.exports = {
             .setCustomId('firsthalf')
             .setLabel('Is the character in the first half? (yes/no)')
             .setStyle(TextInputStyle.Short)
-            .setValue(`${character.firsthalf}`)
+            .setValue(`${character.firsthalf ? 'yes' : 'no'}`)
             .setRequired(true);
 
         const version = new TextInputBuilder()
