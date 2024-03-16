@@ -4,7 +4,7 @@ const Tables = require('../../dbInit.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('copylist')
-        .setDescription('Remove a character from active wishlist.')
+        .setDescription('Copy a profile into another profile')
         .addStringOption(option =>
             option
                 .setName('dest')
