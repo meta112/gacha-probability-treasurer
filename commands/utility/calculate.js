@@ -1,6 +1,13 @@
 const { SlashCommandBuilder } = require('discord.js');
+const Tables = require('../../dbInit.js');
 
-function numwishes(){
+function numwishes(interaction){
+    const user = Tables.Users.findOne({ where: { username: interaction.user.username } });
+    if (!user){
+        console.log('User not found');
+        return null;
+    }
+    console.log(`Found user ${interaction.user.username}`);
     return 5;
 }
 
@@ -18,8 +25,8 @@ module.exports = {
         let pity5 = 0;
         let softpity = 0;
         // placeholder n
-        const n = numwishes();
-        let result = `You pulled ${n * 10} times and got:`;
+        const n = numwishes(interaction);
+        let result = `You pulled ${n} times and got:`;
         for (let i = 0; i < n; i++){
             for (let j = 0; j < 10; j++){
                 if (pity5 > 73){
