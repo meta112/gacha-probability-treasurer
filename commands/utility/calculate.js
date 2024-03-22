@@ -1,5 +1,9 @@
 const { SlashCommandBuilder } = require('discord.js');
 
+function numwishes(){
+    return 5;
+}
+
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('calculate')
@@ -14,7 +18,7 @@ module.exports = {
         let pity5 = 0;
         let softpity = 0;
         // placeholder n
-        const n = 10;
+        const n = numwishes();
         let result = `You pulled ${n * 10} times and got:`;
         for (let i = 0; i < n; i++){
             for (let j = 0; j < 10; j++){
