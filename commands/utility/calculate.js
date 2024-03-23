@@ -4,7 +4,11 @@ const Tables = require('../../dbInit.js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('calculate')
-		.setDescription('Simulates wishes to find probability of achieving wishlist'),
+		.setDescription('Simulates wishes to find probability of achieving wishlist')
+        .addIntegerOption(option =>
+            option
+                .setName('futurewishes')
+                .setDescription('Number of wishes you expect to gain by the end. If empty, will be estimated based on version dates.')),
 	async execute(interaction) {
         await interaction.deferReply();
         let rand = 0;
@@ -23,7 +27,16 @@ module.exports = {
         const primogems = user.primogems;
         const fates = user.fates;
         const starglitter = user.starglitter;
-        const n = parseInt(primogems / 160 + fates + starglitter / 5);
+        let n = parseInt(primogems / 160 + fates + starglitter / 5);
+        const fwInput = interaction.options.getInteger('futurewishes');
+        if (fwInput) {
+            if (fwInput >= 0) {
+                n += fwInput;
+            } else {
+                return interaction.editReply('Cannot enter negative number.');
+            }
+        }
+
         console.log(n);
         //
 
