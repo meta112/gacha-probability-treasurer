@@ -18,6 +18,7 @@ module.exports = {
         let pity4 = 0;
         let pity5 = 0;
         let softpity = 0;
+        let guarantee = false;
 
         const user = await Tables.Users.findOne({ where: { username: interaction.user.username } });
         if (!user){
@@ -115,9 +116,16 @@ module.exports = {
                     five++;
                     pity5 = 0;
                     pity4++;
-                    simresultarr[targetcount]++;
-                    targetcount++;
-                    if (targetcount >= wishcountarr.length) break;
+
+                    const win5050 = Math.floor(Math.random() * 2);
+                    if (guarantee || win5050 == 1){
+                        simresultarr[targetcount]++;
+                        guarantee = false;
+                        targetcount++;
+                        if (targetcount >= wishcountarr.length) break;
+                    } else {
+                        guarantee = true;
+                    }
                 } else if (pity4 >= 9 || rand > 1000 - 6 - softpity - 51){
                         four++;
                         pity5++;
