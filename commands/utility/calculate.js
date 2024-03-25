@@ -83,11 +83,12 @@ module.exports = {
         if (fwInput) {
             if (fwInput >= 0) {
                 n += fwInput;
+                for (let i = 0; i < wishcountarr.length; i++){
+                    wishcountarr[i] = n;
+                }
             } else {
                 return interaction.editReply('Cannot enter negative number.');
             }
-        } else {
-            // const currdate = new Date();
         }
 
         console.log(n);
@@ -105,6 +106,12 @@ module.exports = {
         const oldguarantee = guarantee;
 
         let result = `You pulled ${maxrolls} times and got:`;
+        if (fwInput) {
+            result =
+`Warning: Manually estimating wish gain may not be accurate for targets at different dates.
+
+${result}`;
+        }
         for (let sim = 0; sim < numSimulations; sim++) {
             targetcount = 0;
             pity4 = oldpity4;
