@@ -11,19 +11,21 @@ module.exports = {
                 .setDescription('Number of wishes you expect to gain by the end. If empty, will be estimated based on version dates.')),
 	async execute(interaction) {
         await interaction.deferReply();
-        let rand = 0;
-        let three = 0;
-        let four = 0;
-        let five = 0;
-        let pity4 = 0;
-        let pity5 = 0;
-        let softpity = 0;
-        let guarantee = false;
 
         const user = await Tables.Users.findOne({ where: { username: interaction.user.username } });
         if (!user){
             return interaction.reply({ content: 'User not found' });
         }
+
+        let rand = 0;
+        let three = 0;
+        let four = 0;
+        let five = 0;
+        let pity4 = 0;
+        let pity5 = user.pity;
+        let softpity = 0;
+        let guarantee = user.guaranteed;
+
         // calculate number of wishes
 
         const primogems = user.primogems;
