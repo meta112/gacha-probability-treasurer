@@ -24,6 +24,16 @@ module.exports = {
             return interaction.reply({ content: 'User not found' });
         }
         // calculate number of wishes
+
+        const wishlist = await Tables.Wishlist.findAll({ where: { username: interaction.user.username, profile: user.active_profile } });
+        wishlist.sort((a, b) => a.versions_away - b.versions_away);
+        let targetcount = 0;
+        for (let i = 0; i < wishlist.length; i++){
+            targetcount += (wishlist[i].cons + 1);
+        }
+        const wishcountarr = new Array(targetcount);
+        const simresultarr = new Array(targetcount);
+
         const primogems = user.primogems;
         const fates = user.fates;
         const starglitter = user.starglitter;
@@ -35,6 +45,8 @@ module.exports = {
             } else {
                 return interaction.editReply('Cannot enter negative number.');
             }
+        } else {
+            const currdate = new Date();
         }
 
         console.log(n);
