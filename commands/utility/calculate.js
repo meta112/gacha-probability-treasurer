@@ -93,16 +93,25 @@ module.exports = {
 
         console.log(n);
         //
-        const numSimulations = 100000;
+        const numSimulations = 1000000;
         const maxrolls = wishcountarr[wishcountarr.length - 1];
         for (let test1 = 0; test1 < wishcountarr.length; test1++){
             console.log(wishcountarr[test1]);
         }
         console.log(`${typeof maxrolls} ${maxrolls}`);
 
+        const oldpity4 = pity4;
+        const oldpity5 = pity5;
+        const oldsoftpity = softpity;
+        const oldguarantee = guarantee;
+
         let result = `You pulled ${maxrolls} times and got:`;
         for (let sim = 0; sim < numSimulations; sim++) {
             targetcount = 0;
+            pity4 = oldpity4;
+            pity5 = oldpity5;
+            softpity = oldsoftpity;
+            guarantee = oldguarantee;
             for (let i = 1; i <= maxrolls; i++){
                 if (pity5 > 73){
                     softpity = (pity5 - 73) * 60;
