@@ -153,11 +153,6 @@ module.exports = {
         const pfour = four / (maxrolls) / numSimulations * 100;
         const pfive = five / (maxrolls) / numSimulations * 100;
         result = `${result}
-Proportion of each rarity:
-${pfive.toPrecision(3)}% 5-star
-${pfour.toPrecision(3)}% 4-star
-${pthree.toPrecision(4)}% 3-star
-
 Probability of rolling wishlist targets:
 `;
         for (let i = 0; i < simresultarr.length; i++){
