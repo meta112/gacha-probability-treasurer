@@ -160,7 +160,7 @@ Probability of rolling wishlist targets:
 `;
         for (let i = 0; i < simresultarr.length; i++){
             result = `${result}
-${targetarr[i]}: ${(simresultarr[i] / numSimulations).toPrecision(4)}`;
+${targetarr[i]}: ${(simresultarr[i] / numSimulations * 100).toPrecision(3)}%`;
         }
         /*
         result = `${result}
