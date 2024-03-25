@@ -105,7 +105,7 @@ module.exports = {
 
         const oldguarantee = guarantee;
 
-        let result = `You pulled ${maxrolls} times and got:`;
+        let result = `You pulled ${maxrolls} times!`;
         if (fwInput) {
             result =
 `Warning: Manually estimating wish gain may not be accurate for targets at different dates.
