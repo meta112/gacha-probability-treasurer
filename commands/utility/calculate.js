@@ -18,9 +18,6 @@ module.exports = {
         }
 
         let rand = 0;
-        let three = 0;
-        let four = 0;
-        let five = 0;
         let pity4 = 0;
         let pity5 = user.pity;
         let softpity = 0;
@@ -124,7 +121,6 @@ module.exports = {
                 while (targetcount < wishcountarr.length && i > wishcountarr[targetcount]) targetcount++;
                 if (targetcount >= wishcountarr.length) break;
                 if (rand > 1000 - 6 - softpity){
-                    five++;
                     pity5 = 0;
                     pity4++;
 
@@ -138,20 +134,15 @@ module.exports = {
                         guarantee = true;
                     }
                 } else if (pity4 >= 9 || rand > 1000 - 6 - softpity - 51){
-                        four++;
                         pity5++;
                         pity4 = 0;
                 } else {
-                    three++;
                     pity4++;
                     pity5++;
                 }
 
             }
         }
-        const pthree = three / (maxrolls) / numSimulations * 100;
-        const pfour = four / (maxrolls) / numSimulations * 100;
-        const pfive = five / (maxrolls) / numSimulations * 100;
         result = `${result}
 Probability of rolling wishlist targets:
 `;
