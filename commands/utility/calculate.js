@@ -102,7 +102,7 @@ module.exports = {
 
         const oldpity4 = pity4;
         const oldpity5 = pity5;
-        const oldsoftpity = softpity;
+
         const oldguarantee = guarantee;
 
         let result = `You pulled ${maxrolls} times and got:`;
@@ -110,7 +110,7 @@ module.exports = {
             targetcount = 0;
             pity4 = oldpity4;
             pity5 = oldpity5;
-            softpity = oldsoftpity;
+
             guarantee = oldguarantee;
             for (let i = 1; i <= maxrolls; i++){
                 if (pity5 > 73){
