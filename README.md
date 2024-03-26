@@ -19,12 +19,15 @@ Implemented using the Node.js module discord.js and SQLite through the ORM seque
 
 ## How to use
 After getting the bot set up on your server, use the following slash commands:
-- `/setwishes`: Input the number of wishes you have from various sources of in-game currency, as well as pity build up.
+- `/setwishes`: Input the number of wishes you have from various sources of in-game currency, as well as pity build up. 
+
 ![Entering number of wishes](/images/setwishes.png)
 - `/defineversion`: Set the release date for each version that you plan to roll in.
-- `/addchar`: Add characters that you plan to roll for (note that a "version change" would be the beginning of a new version e.g. if it is currently 4.0, then 4.2 is 2 versions away).
+- `/addchar`: Add characters that you plan to roll for (note that a "version change" would be the beginning of a new version e.g. if it is currently 4.0, then 4.2 is 2 versions away). 
+
 ![Entering a new character](/images/addchar.png)
-- `/calculate`: Run simulations to predict success rates.
+- `/calculate`: Run simulations to predict success rates. 
+
 ![Probabilities](/images/calculate.png)
 
 ## Other commands
